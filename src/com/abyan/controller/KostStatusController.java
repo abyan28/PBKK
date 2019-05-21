@@ -14,13 +14,17 @@ import com.abyan.entity.Kamar;
 import com.abyan.services.KostStatusService;
 
 @Controller
-@RequestMapping("/kostStatus")
 public class KostStatusController {
 
 	@Autowired
 	private KostStatusService kostStatusService;
 	
-	@GetMapping("/show")
+	@RequestMapping("/")
+	public String home(){
+		return "kostStatus";
+	}
+	
+	@GetMapping("/kostStatus")
 	public String showHotelStatus(Model theModel) {
 
 		List<Penghuni> daftarPenghuni = kostStatusService.getActualPenghuni();

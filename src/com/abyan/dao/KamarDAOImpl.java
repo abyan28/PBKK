@@ -20,7 +20,7 @@ public class KamarDAOImpl implements KamarDAO {
 	@Override
 	public List<Kamar> getAllKamar() {
 		Session session = sessionFactory.getCurrentSession();
-		Query<Kamar> query = session.createQuery("from room order by number", Kamar.class);
+		Query<Kamar> query = session.createQuery("from Kamar order by number", Kamar.class);
 		List<Kamar> kamar = query.getResultList();
 		
 		return kamar;
@@ -29,7 +29,7 @@ public class KamarDAOImpl implements KamarDAO {
 	@Override
 	public List<Kamar> getKamarKosong() {
 		Session session = sessionFactory.getCurrentSession();
-		Query<Kamar> query = session.createQuery("select standard from room standard where standard.is_Occupied = 0 order by standard.number", Kamar.class);
+		Query<Kamar> query = session.createQuery("select number from Kamar where is_occupied = 0 order by number", Kamar.class);
 		List<Kamar> kamar = query.getResultList();
 		return kamar;
 	}
@@ -51,7 +51,7 @@ public class KamarDAOImpl implements KamarDAO {
 	@Override
 	public List<Kamar> getOccupiedRooms() {
 		Session session = sessionFactory.getCurrentSession();
-		Query<Kamar> query = session.createQuery("select standard from Room standard where standard.is_Occupied = 1 order by standard.number", Kamar.class);
+		Query<Kamar> query = session.createQuery("select number from Kamar where is_Occupied = 1 order by number", Kamar.class);
 		List<Kamar> kamar = query.getResultList();
 		kamar.forEach(r -> Hibernate.initialize(r.getOccupants())); //otherwise lazy fetch excpetion - this object would not be available outside of transaction)
 		return kamar;

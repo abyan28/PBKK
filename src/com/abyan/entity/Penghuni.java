@@ -25,7 +25,7 @@ public class Penghuni {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "first_name")
+	@Column(name = "firs_name")
 	private String firstName;
 	
 	@Column(name = "last_name")

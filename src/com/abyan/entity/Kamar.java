@@ -31,7 +31,7 @@ public class Kamar {
 	@Column(name = "is_occupied")
 	private boolean isOccupied;
 	
-	@OneToMany(mappedBy = "room", 
+	@OneToMany(mappedBy = "kamar", 
 			cascade = {
 					CascadeType.DETACH,
 					CascadeType.MERGE,

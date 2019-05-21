@@ -29,7 +29,7 @@ public class PenghuniDAOImpl implements PenghuniDAO {
 	@Override
 	public List<Penghuni> getCheckedoutPenghuni() {
 		Session session = sessionFactory.getCurrentSession();
-		Query<Penghuni> query = session.createQuery("select id_number from guest id_number where id_number.is_checkedout=1 order by last_name", Penghuni.class); 
+		Query<Penghuni> query = session.createQuery(" from Penghuni where isCheckedout=1 order by lastName", Penghuni.class); 
 		List<Penghuni> penghuni = query.getResultList();
 		
 		return penghuni;
@@ -53,7 +53,7 @@ public class PenghuniDAOImpl implements PenghuniDAO {
 		LocalDate tomorrow = LocalDate.now();
 		tomorrow.plusDays(2);
 		Session session = sessionFactory.getCurrentSession();
-		Query<Penghuni> query = session.createQuery("select id_number from guest id_number where id_number.checkout_date <= :tomorrow and id_number.is_checkedout = 1 order by checkout_date", Penghuni.class); 
+		Query<Penghuni> query = session.createQuery("select id_number from Penghuni where id_number.checkout_date <= :tomorrow and id_number.is_checkedout = 1 order by checkout_date", Penghuni.class); 
 		query.setParameter("tomorrow", tomorrow);
 		List<Penghuni> penghuni = query.getResultList();
 		

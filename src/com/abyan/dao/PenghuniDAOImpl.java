@@ -1,6 +1,9 @@
 package com.abyan.dao;
 
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import java.time.LocalDate;
 
 import org.hibernate.Session;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.abyan.entity.Penghuni;
 
+@Transactional
 @Repository
 public class PenghuniDAOImpl implements PenghuniDAO {
 
@@ -53,7 +57,7 @@ public class PenghuniDAOImpl implements PenghuniDAO {
 		LocalDate tomorrow = LocalDate.now();
 		tomorrow.plusDays(2);
 		Session session = sessionFactory.getCurrentSession();
-		Query<Penghuni> query = session.createQuery("select id_number from Penghuni where id_number.checkout_date <= :tomorrow and id_number.is_checkedout = 1 order by checkout_date", Penghuni.class); 
+		Query<Penghuni> query = session.createQuery("from Penghuni where id_number.checkout_date <= :tomorrow and id_number.is_checkedout = 1 order by checkout_date", Penghuni.class); 
 		query.setParameter("tomorrow", tomorrow);
 		List<Penghuni> penghuni = query.getResultList();
 		

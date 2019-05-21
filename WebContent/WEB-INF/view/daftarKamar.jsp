@@ -31,6 +31,7 @@
 			<td height="350px">
 				<!-- Page content table -->
 				<table class="content">
+				<tr>
 					<td width = "100px" >
 						<!--Left Side Menu  -->
 						<jsp:include page="include/roomLeftMenu.jsp"/>
@@ -50,7 +51,7 @@
 
 							</tr>
 							<!-- loop over and print out customers  -->
-							<c:forEach var="tempRoom" items="${roomList}">
+							<c:forEach var="tempRoom" items="${kamarkosong}">
 
 								<!--construct an cheout link with room id  -->
 								<c:url var="checkinLink" value="/guest/checkin">
@@ -67,6 +68,7 @@
 							</c:forEach>
 						</table>
 					</td>
+					</tr>
 				</table>
 			</td>
 		</tr>

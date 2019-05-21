@@ -20,16 +20,11 @@ public class KostStatusController {
 	private KostStatusService kostStatusService;
 	
 	@RequestMapping("/")
-	public String home(){
-		return "kostStatus";
-	}
-	
-	@GetMapping("/kostStatus")
-	public String showHotelStatus(Model theModel) {
-
+	public String home(Model theModel){
 		List<Penghuni> daftarPenghuni = kostStatusService.getActualPenghuni();
 		List<Kamar> daftarKamar = kostStatusService.getAllKamar();
-
+		System.out.println(daftarPenghuni.size());
+		System.out.println(daftarKamar.size());
 		Integer jumlahKamar = 0;
 		Integer jumlahOccupiedRooms = 0;
 		Integer jumlahKamarKosong = 0;
@@ -66,6 +61,76 @@ public class KostStatusController {
 				}
 			}
 		}
+		System.out.println(jumlahKamar);
+		System.out.println(jumlahOccupiedRooms);
+		System.out.println(jumlahKamarKosong);
+		System.out.println(jumlahKamarStandardKosong);
+		System.out.println(jumlahKamarBisnisKosong);
+		System.out.println(jumlahKamarPremiumKosong);
+		System.out.println(jumlahPenghuni);
+		System.out.println(upcommingCheckOuts);
+		theModel.addAttribute("jumlahKamar", jumlahKamar);
+		theModel.addAttribute("jumlahOccupiedRooms", jumlahOccupiedRooms);
+		theModel.addAttribute("jumlahKamarKosong", jumlahKamarKosong);
+		theModel.addAttribute("jumlahKamarStandardKosong", jumlahKamarStandardKosong);
+		theModel.addAttribute("jumlahKamarBisnisKosong", jumlahKamarBisnisKosong);
+		theModel.addAttribute("jumlahKamarPremiumKosong", jumlahKamarPremiumKosong);
+		theModel.addAttribute("jumlahPenghuni", jumlahPenghuni);
+		theModel.addAttribute("upcommingCheckOuts", upcommingCheckOuts);
+		return "/kostStatus";
+	}
+	
+	@GetMapping("/kostStatus")
+	public String showHotelStatus(Model theModel) {
+
+		List<Penghuni> daftarPenghuni = kostStatusService.getActualPenghuni();
+		List<Kamar> daftarKamar = kostStatusService.getAllKamar();
+		System.out.println(daftarPenghuni.size());
+		System.out.println(daftarKamar.size());
+		Integer jumlahKamar = 0;
+		Integer jumlahOccupiedRooms = 0;
+		Integer jumlahKamarKosong = 0;
+		Integer jumlahKamarStandardKosong = 0;
+		Integer jumlahKamarBisnisKosong = 0;
+		Integer jumlahKamarPremiumKosong = 0;
+
+		for(Kamar kamar : daftarKamar) {
+			jumlahKamar ++;
+			if(kamar.getIsOccupied()) {
+				jumlahOccupiedRooms ++;	
+			}else {
+				jumlahKamarKosong ++;
+				if(kamar.getStandard().equals("standard")) {
+					jumlahKamarStandardKosong ++;
+				}else if(kamar.getStandard().equals("business")) {
+					jumlahKamarBisnisKosong ++;
+				}else {
+					jumlahKamarPremiumKosong ++;
+				}
+			}
+
+		}
+
+		Integer jumlahPenghuni = 0;
+		Integer upcommingCheckOuts = 0;
+
+		for(Penghuni penghuni : daftarPenghuni) {
+			if(!penghuni.getIsCheckedout()) {
+				jumlahPenghuni++;
+			}else {
+				if(penghuni.getCheckoutDate().isEqual(LocalDate.now()) || penghuni.getCheckoutDate().isBefore(LocalDate.now())) {
+					upcommingCheckOuts++;
+				}
+			}
+		}
+		System.out.println(jumlahKamar);
+		System.out.println(jumlahOccupiedRooms);
+		System.out.println(jumlahKamarKosong);
+		System.out.println(jumlahKamarStandardKosong);
+		System.out.println(jumlahKamarBisnisKosong);
+		System.out.println(jumlahKamarPremiumKosong);
+		System.out.println(jumlahPenghuni);
+		System.out.println(upcommingCheckOuts);
 		theModel.addAttribute("jumlahKamar", jumlahKamar);
 		theModel.addAttribute("jumlahOccupiedRooms", jumlahOccupiedRooms);
 		theModel.addAttribute("jumlahKamarKosong", jumlahKamarKosong);
@@ -75,6 +140,6 @@ public class KostStatusController {
 		theModel.addAttribute("jumlahPenghuni", jumlahPenghuni);
 		theModel.addAttribute("upcommingCheckOuts", upcommingCheckOuts);
 
-		return "kostStatus";
+		return "/kostStatus";
 	}
 }

@@ -30,6 +30,7 @@
 			<td height="350px">
 				<!-- Page content table -->
 				<table class="content">
+				<tr>
 					<td width = "100px">
 						<!--Left Side Menu  -->
 						<jsp:include page="include/guestLeftMenu.jsp"/>
@@ -42,7 +43,7 @@
 						<div class="error"><b>${error}</b></div>
 						<table class="guestList">
 						<tr>
-						<div class="description">Kost guests list:</div><br>
+							<div class="description">Kost guests list:</div><br>
 						</tr>
 							<tr>
 								<th class =  "list">First name</th>
@@ -73,7 +74,7 @@
 								<tr class="list">
 									<td class =  "list">${tempGuest.firstName}</td>
 									<td class =  "list">${tempGuest.lastName}</td>
-									<td class =  "list">${tempGuest.room.number}</td>
+									<td class =  "list">${tempGuest.kamar.number}</td>
 									<td class =  "list">${tempGuest.phoneNumber}</td>
 									<td class =  "list">${tempGuest.checkoutDate}</td>
 									<td class =  "list"><a href="${checkoutLink}">Checkout</a> | <a href="${updateLink}">Update</a> | <a href="${billLink}">Bill</a>
@@ -82,6 +83,7 @@
 							</c:forEach>
 						</table>
 					</td>
+					</tr>
 				</table>
 			</td>
 		</tr>

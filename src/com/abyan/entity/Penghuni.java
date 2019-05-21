@@ -55,8 +55,8 @@ public class Penghuni {
 	@Column(name = "is_checkedout")
 	private boolean isCheckedout;
 
-	@OneToOne(cascade = {})
-	@JoinColumn(name = "last_checkedout_room_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "last_checkedout_room_id", referencedColumnName = "id")
 	private Kamar lastCheckedoutRoom;
 
 	public Penghuni() {
@@ -64,14 +64,13 @@ public class Penghuni {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Penghuni(String firstName, String lastName, String idNumber, String phoneNumber, Kamar kamar,
+	public Penghuni(String firstName, String lastName, String idNumber, String phoneNumber,
 			LocalDate checkoutDate, LocalDate checkinDate, boolean isCheckedout) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.idNumber = idNumber;
 		this.phoneNumber = phoneNumber;
-		this.kamar = kamar;
 		this.checkoutDate = checkoutDate;
 		this.checkinDate = checkinDate;
 		this.isCheckedout = isCheckedout;

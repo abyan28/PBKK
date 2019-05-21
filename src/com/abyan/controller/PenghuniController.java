@@ -40,9 +40,9 @@ public class PenghuniController {
 	public String guestList(Model theModel) {
 
 		List<Penghuni> daftarPenghuni = penghuniService.getActualPenghuni();
-		theModel.addAttribute("daftarPenghuni", daftarPenghuni);
+		theModel.addAttribute("guestList", daftarPenghuni);
 
-		return "daftarPenghuni";
+		return "/daftarPenghuni";
 	}
 	
 	@GetMapping("/showTambahPenghuni")
@@ -58,7 +58,7 @@ public class PenghuniController {
 		theModel.addAttribute("roomsMap", vacantRoomsMap);
 		theModel.addAttribute("selectedRoom", firstRoomOnList); //the room to be shown as first on the list
 
-		return "formTambahPenghuni";
+		return "/formTambahPenghuni";
 	}
 	
 	@PostMapping("/simpanPenghuni")
@@ -71,7 +71,7 @@ public class PenghuniController {
 			theModel.addAttribute("roomsMap", vacantRoomsMap);
 			theModel.addAttribute("selectedRoom", firstRoomOnList);
 
-			return "formTambahPenghuni";
+			return "/formTambahPenghuni";
 
 		}else {
 			penghuni.getKamar().setOccupied(true);
@@ -94,11 +94,12 @@ public class PenghuniController {
 		theGuest.setCheckedout(true);
 		theGuest.setKamar(null);
 		theGuest.setLastCheckedoutRoom(theRoom);
-		theRoom.getOccupants().remove(theGuest);
+		//theRoom.getOccupants().remove(theGuest);
+		/*
 		if(theRoom.getOccupants().size() == 0) {
 			theRoom.setOccupied(false);
 		}
-
+		*/
 		penghuniService.saveUpdatePenghuni(theGuest);
 		penghuniService.saveUpdateKamar(theRoom);
 
@@ -119,7 +120,7 @@ public class PenghuniController {
 		theModel.addAttribute("guest", theGuest);
 		theModel.addAttribute("roomsMap", vacantRoomsMap);
 		theModel.addAttribute("selectedRoom", selectedRoom);
-		return "formTambahPenghuni";
+		return "/formTambahPenghuni";
 	}
 	
 	@GetMapping("/checkin")
@@ -128,7 +129,7 @@ public class PenghuniController {
 		Kamar selectedRoom = penghuniService.getKamarById(theRoomId);
 		theModel.addAttribute("guest", theGuest);
 		theModel.addAttribute("selectedRoom", selectedRoom);
-		return "formTambahPenghuni";
+		return "/formTambahPenghuni";
 	}
 	
 	@GetMapping("/archivedGuestsList")
@@ -137,7 +138,7 @@ public class PenghuniController {
 		List<Penghuni> guestList = penghuniService.getArsipPenghuni();
 		theModel.addAttribute("daftarPenghuni", guestList);
 
-		return "archivedGuestsList";
+		return "/archivedGuestsList";
 	}
 	
 	@GetMapping("/checkInToOccupiedRoom")
@@ -157,13 +158,13 @@ public class PenghuniController {
 		theModel.addAttribute("guest", penghuni);
 		theModel.addAttribute("roomsMap", occupiedRoomsMap);
 
-		return "formTambahPenghuni";
+		return "/formTambahPenghuni";
 	}
 	
 	private LinkedHashMap<String, Kamar> populateRoomsMap(List<Kamar> kamars){
 
 		if(kamars == null || kamars.size() == 0) {
-			kamars.add(new Kamar(0, "Tidak ada kamar kosong", true, null));
+			kamars.add(new Kamar(0, "Tidak ada kamar kosong", true));
 		}
 		LinkedHashMap<String, Kamar> roomsMap = new LinkedHashMap<String, Kamar>();
 		for(Kamar kamar : kamars) {

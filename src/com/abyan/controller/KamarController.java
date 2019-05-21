@@ -26,8 +26,9 @@ public class KamarController {
 	public String roomList(Model theModel) {
 		
 		List <Kamar> kamarKosong = kamarService.getKamarKosong();
-		theModel.addAttribute("daftarKamar", kamarKosong);
-		return "daftarKamar";
+		theModel.addAttribute("kamarkosong", kamarKosong);
+		System.out.println(kamarKosong.size());
+		return "/daftarKamar";
 	}
 	
 	@GetMapping("/occupiedRoomlist")
@@ -35,25 +36,26 @@ public class KamarController {
 		
 		List <Kamar> occupiedRooms = kamarService.getOccupiedRooms();
 		theModel.addAttribute("daftarKamar", occupiedRooms);
-		return "occupiedRoomList";
+		return "/occupiedRoomList";
 	}
 	
 	@GetMapping("/checkout")
 	public String checkoutRoom (@RequestParam("roomId") Integer theRoomId) {
 		System.out.println("I am mapped!!!");
 		Kamar kamar = kamarService.getKamarById(theRoomId);
-		List<Penghuni> occupants = kamar.getOccupants();
+		//List<Penghuni> occupants = kamar.getOccupants();
 		LocalDate localDate = LocalDate.now();
 		localDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
-		
+		/*
 		for(Penghuni penghuni : occupants) {
 			System.out.println(penghuni.getFirstName());
 			penghuni.setCheckedout(true);
 			penghuni.setCheckoutDate(localDate);
-			kamar.setOccupants(null);
+			//kamar.setOccupants(null);
 			kamar.setOccupied(false);
 
 		}
+		*/
 		kamarService.saveUpdateRoom(kamar);
 		return "redirect:/kamar/occupiedRoomlist";
 	}

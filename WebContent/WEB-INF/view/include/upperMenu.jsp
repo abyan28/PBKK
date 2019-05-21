@@ -1,11 +1,11 @@
 <div class = "uppermenuText"> 
 |
-<a href="kostStatus" class = "uppermenu">Status Kost</a>
+<a href="/PBKK-master/kostStatus" class = "uppermenu">Status Kost</a>
 |
-<a href="penghuni/list" class = "uppermenu">Penghuni</a>
+<a href="/PBKK-master/penghuni/list" class = "uppermenu">Penghuni</a>
 |
-<a href="kamar/list" class = "uppermenu">Kamar</a>
+<a href="/PBKK-master/kamar/list" class = "uppermenu">Kamar</a>
 |
-<a href="comingCheckout/list" class = "uppermenu">Next Checkout</a>
+<a href="/PBKK-master/comingCheckout/list" class = "uppermenu">Next Checkout</a>
 |
 </div>

@@ -2,6 +2,8 @@ package com.abyan.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.abyan.entity.Kamar;
 
+@Transactional
 @Repository
 public class KamarDAOImpl implements KamarDAO {
 
@@ -29,7 +32,7 @@ public class KamarDAOImpl implements KamarDAO {
 	@Override
 	public List<Kamar> getKamarKosong() {
 		Session session = sessionFactory.getCurrentSession();
-		Query<Kamar> query = session.createQuery("select number from Kamar where is_occupied = 0 order by number", Kamar.class);
+		Query<Kamar> query = session.createQuery("from Kamar where is_occupied = 0", Kamar.class);
 		List<Kamar> kamar = query.getResultList();
 		return kamar;
 	}
@@ -38,7 +41,7 @@ public class KamarDAOImpl implements KamarDAO {
 	public Kamar getKamarById(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		Kamar kamar = session.get(Kamar.class, id);
-		Hibernate.initialize(kamar.getOccupants()); //otherwise lazy fetch excpetion - this object would not be available outside of transaction
+		//Hibernate.initialize(kamar.getOccupants()); //otherwise lazy fetch excpetion - this object would not be available outside of transaction
 		return kamar;
 	}
 
@@ -51,9 +54,9 @@ public class KamarDAOImpl implements KamarDAO {
 	@Override
 	public List<Kamar> getOccupiedRooms() {
 		Session session = sessionFactory.getCurrentSession();
-		Query<Kamar> query = session.createQuery("select number from Kamar where is_Occupied = 1 order by number", Kamar.class);
+		Query<Kamar> query = session.createQuery("from Kamar where is_Occupied = 1 order by number", Kamar.class);
 		List<Kamar> kamar = query.getResultList();
-		kamar.forEach(r -> Hibernate.initialize(r.getOccupants())); //otherwise lazy fetch excpetion - this object would not be available outside of transaction)
+		//kamar.forEach(r -> Hibernate.initialize(r.getOccupants())); //otherwise lazy fetch excpetion - this object would not be available outside of transaction)
 		return kamar;
 	}
 

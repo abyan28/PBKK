@@ -31,25 +31,16 @@ public class Kamar {
 	@Column(name = "is_occupied")
 	private boolean isOccupied;
 	
-	@OneToMany(mappedBy = "kamar", 
-			cascade = {
-					CascadeType.DETACH,
-					CascadeType.MERGE,
-					CascadeType.PERSIST,
-					CascadeType.REFRESH
-					}
-	)
-	private List<Penghuni> occupants;
+	
 	
 	public Kamar() {
 		
 	}
 	
-	public Kamar(int number, String standard, boolean isOccupied, List<Penghuni> occupants) {
+	public Kamar(int number, String standard, boolean isOccupied) {
 		this.number = number;
 		this.standard = standard;
 		this.isOccupied = isOccupied;
-		this.occupants = occupants;
 	}
 
 
@@ -83,14 +74,6 @@ public class Kamar {
 
 	public void setOccupied(boolean isOccupied) {
 		this.isOccupied = isOccupied;
-	}
-
-	public List<Penghuni> getOccupants() {
-		return occupants;
-	}
-
-	public void setOccupants(List<Penghuni> occupants) {
-		this.occupants = occupants;
 	}
 	
 	public String toString () {

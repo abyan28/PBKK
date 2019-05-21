@@ -54,14 +54,14 @@
 											<tr>
 												<td>Number of rooms:</td>
 												<td><div style="font-weight: bold">
-														<tab1 />${numberOfRooms}</div></td>
+														 ${jumlahKamar}</div></td>
 
 
 											</tr>
 											<tr>
 												<td>Occupied rooms:</td>
 												<td><div style="font-weight: bold">
-														<tab1 />${numberOfOccupiedRooms}</div></td>
+														 ${jumlahOccupiedRooms}</div></td>
 
 
 											</tr>
@@ -69,21 +69,21 @@
 											<tr>
 												<td>Free rooms:</td>
 												<td><div style="font-weight: bold">
-														<tab1 />${numberOfVacantRooms}</div></td>
+														 ${jumlahKamarKosong}</div></td>
 
 
 											</tr>
 											<tr>
 												<td>Free standard rooms:</td>
 												<td><div style="font-weight: bold">
-														<tab1 />${numberOfVacantStandardRooms}</div></td>
+														 ${jumlahKamarStandardKosong}</div></td>
 
 
 											</tr>
 											<tr>
 												<td>Free business rooms:</td>
 												<td><div style="font-weight: bold">
-														<tab1 />${numberOfVacantBusinessRooms}</div></td>
+														 ${jumlahKamarBisnisKosong}</div></td>
 
 
 											</tr>
@@ -91,7 +91,7 @@
 											<tr>
 												<td>Free premium rooms:</td>
 												<td><div style="font-weight: bold">
-														<tab1 />${numberOfVacantPremiumRooms}</div></td>
+														 ${jumlahKamarPremiumKosong}</div></td>
 
 
 											</tr>
@@ -101,7 +101,7 @@
 
 									<!--internal table cell two  -->
 									<td>
-									<th><tab1 /></th>
+									<th> </th>
 									</td>
 
 									<!--internal table cell three  -->
@@ -114,12 +114,12 @@
 											<tr>
 												<td>Number of Guests:</td>
 												<td><div style="font-weight: bold">
-														<tab1 />${numberOfGuests}</div></td>
+														 ${jumlahPenghuni}</div></td>
 											</tr>
 											<tr>
 												<td>Upcoming checkouts:</td>
 												<td><div style="font-weight: bold">
-														<tab1 />${upcommingCheckOuts}</div></td>
+														 ${upcommingCheckOuts}</div></td>
 											</tr>
 										</table>
 									</td>
